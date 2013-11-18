@@ -1,0 +1,55 @@
+body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 13px;
+  color: #444;
+}
+
+.header {
+  font-weight: bold;
+}
+
+.render-progress {
+  width: 120px;
+  float: left;
+}
+
+.render-id {
+  width: 200px;
+  float: left;
+}
+
+.render-image {
+  width: 200px;
+  float: left;
+}
+
+.render-status {
+  width: 200px;
+  float: left;
+}
+
+.clearfix {
+  clear: left;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
+}
+
+.codearea {
+	font-family: "Courier", "Courier New", monospace;
+}
+
+.progress-container {
+	width: 100px;
+	background-color: #ddd;
+	margin: 2px 0;
+}
+
+.progress {
+	height: 14px;
+	background-color: #393;
+	width: 95%;
+}

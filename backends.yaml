@@ -1,0 +1,5 @@
+backends:
+- name: render-backend
+  class: B4
+  instances: 1
+  options: dynamic

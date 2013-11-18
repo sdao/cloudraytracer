@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <title>Render {{ render_id }}</title>
+    <link href="../static/index.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  	<h2>Render {{ render_id }}</h2>
+  	<div>Progress:</div>
+  	<div class="progress-container">
+  		<div class="progress" style="width: {{ render_progress * 100.0 }}%;">
+  		</div>
+  	</div>
+  	<div>Status: {{ render_status }}</div>
+  	{% if render_image %}
+  		<div>Image: <a href="{{ render_image }}">{{ render_image }}</a></div>
+  	{% endif %}
+  	<h2>Script</h2>
+  	<div>
+<pre>
+{{ render_script }}
+</pre>
+	</div>
+  </body>
+</html>
+{% endautoescape %}

@@ -1,0 +1,4 @@
+queue:
+- name: render-queue
+  rate: 5/s
+  target: render-backend

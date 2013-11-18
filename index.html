@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <title>Raytracer Dashboard</title>
+    <link href="static/index.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+    <h2>Renders</h2>
+    <div class="renders">
+      <div class="header">
+        <div class="render-progress">Progress</div>
+        <div class="render-status">Status</div>
+        <div class="render-id">Render ID</div>
+        <div class="render-image">Image</div>
+        <div class="clearfix"></div>
+      </div>
+      {% for render in renders %}
+        <div>
+          <div class="render-progress">
+            <div class="progress-container">
+              <div class="progress" style="width: {{ render.progress * 100.0 }}%;">
+              </div>
+            </div>
+          </div>
+          <div class="render-status">
+          {{ render.status }}
+          </div>
+          <div class="render-id">
+            <a href="{{ render.id }}">{{ render.id }}</a>
+          </div>
+          <div class="render-image">
+          {% if render.image %}
+              <a href="{{ render.image }}"><img src="{{ render.image }}" alt="{{ render.image }}" height="100" /></a>
+          {% endif %}
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      {% endfor %}
+    </div>
+      
+    <h2>New Render</h2>
+    <form action="/render" method="post">
+      <div>
+<textarea name="script" rows="10" cols="60" class="codearea">
+{
+   "objects": [
+      {
+         "type": "sphere",
+         "params": {
+            "origin": (-2.0, 0.0, 0.0),
+            "radius": 2.0,
+            "shader": "blue"
+         }
+      },
+      {
+         "type": "sphere",
+         "params": {
+            "origin": (2.0, 0.0, 0.0),
+            "radius": 2.0,
+            "shader": "green"
+         }
+      },
+      {
+         "type": "plane",
+         "params": {
+            "face_normal": (0.0, 0.0, 1.0),
+            "offset": -1.0,
+            "shader": "checkerboard"
+         }
+      }
+   ],
+   "lights": [
+      {
+         "color": (255, 255, 255, 255),
+         "position": (0.0, -4.0, 0.0)
+      },
+      {
+         "color": (255, 255, 255, 255),
+         "position": (2.0, -4.0, 0.0)
+      }
+   ],
+   "shaders": {
+      "blue":
+      {
+         "type": "blinn",
+         "params": {
+           "diffuse": (0, 255, 255, 255),
+           "specular": (0, 0, 255, 255),
+           "reflect": 0.5,
+           "roughness": 10
+         }
+      },
+      "green":
+      {
+         "type": "blinn",
+         "params": {
+           "diffuse": (50, 255, 0, 255),
+           "specular": (0, 255, 0, 255),
+           "reflect": 0.7,
+           "roughness": 5
+         }
+      },
+      "checkerboard":
+      {
+         "type": "checker",
+         "params": {
+           "diffuse1": (255, 255, 255, 255),
+           "diffuse2": (0, 0, 0, 255),
+           "reflect1": 0.1,
+           "reflect2": 0.7
+         }
+      }
+   },
+   "camera": {
+      "width": 800,
+      "height": 600,
+      "angle": 0.5,
+      "position": (0.0, -5.0, 0.0),
+      "look_at": (0.0, 0.0, 0.0)
+   }
+}
+</textarea>
+      </div>
+      <div><input type="submit" value="Render"></div>
+    </form>
+    
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+
+  </body>
+</html>
+{% endautoescape %}
